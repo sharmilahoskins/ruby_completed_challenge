@@ -34,6 +34,7 @@ class Tasklist
     @incomplete_list = []
     @due_today = []
     @list_list = []
+    @month_list = []
   end
   def show_list
     @list
@@ -66,5 +67,10 @@ class Tasklist
     new_due = @duedate_list.reject{|x| x.done == true}
     new_due = new_due.sort_by{|a| a.due_date}
     @list_list = new_due.concat(@incomplete_list)
+  end
+  def month_list
+    new_due = @duedate_list.reject{|x| x.due_date.month != Date.today.month}
+    new_due = new_due.sort_by{|a| a.due_date}
+    @month_list = new_due.concat(@incomplete_list)
   end
 end
